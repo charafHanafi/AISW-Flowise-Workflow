@@ -1,0 +1,31 @@
+{
+  "id": "data-collection-flow",
+  "nodes": [
+    {
+      "id": "scraper-node",
+      "type": "web_scraper",
+      "parameters": {
+        "url": ["https://twitter.com/search?q=insurance"],
+        "frequency": "hourly"
+      }
+    },
+    {
+      "id": "api-node",
+      "type": "api_connector",
+      "parameters": {
+        "api_url": "https://api.twitter.com/2/tweets/search",
+        "headers": {"Authorization": "Bearer YOUR_TWITTER_API_KEY"},
+        "query_params": {"query": "Moroccan insurance"}
+      }
+    },
+    {
+      "id": "database-node",
+      "type": "vector_db",
+      "parameters": {
+        "database": "chroma",
+        "store": "insurance_market_data"
+      }
+    }
+  ]
+}
+
